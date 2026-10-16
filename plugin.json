@@ -1,0 +1,26 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "superpowers",
+  "version": "7.0.0",
+  "description": "Superpowers software development methodology: brainstorming, planning, TDD, systematic debugging, and subagent-driven development. Native Vibe port of obra/superpowers (https://github.com/obra/superpowers), MIT.",
+  "author": {
+    "name": "Sascha Lichtenstein",
+    "url": "https://github.com/saschalichtenstein"
+  },
+  "repository": "https://github.com/saschalichtenstein/superpowers-vibe",
+  "license": "MIT",
+  "keywords": [
+    "superpowers",
+    "tdd",
+    "debugging",
+    "workflow",
+    "brainstorming",
+    "subagents"
+  ],
+  "extensions": {
+    "ai.mistral.vibe": {
+      "schemaVersion": 1,
+      "toolNamespace": "superpowers"
+    }
+  }
+}
