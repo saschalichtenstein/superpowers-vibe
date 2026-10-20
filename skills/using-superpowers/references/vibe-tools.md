@@ -14,23 +14,28 @@ never have to guess.
 
 ## Subagent dispatch
 
-- "Dispatch a subagent" maps to the `subagent` tool namespace:
-  `spawn`, `sendMessage`, `wait`, `interrupt`, `close`.
+- "Dispatch a subagent" maps to the `agents` tool namespace:
+  `spawn`, `send_message`, `list`, `interrupt`.
 - Spawn one subagent per independent task. Craft its prompt exactly as the
   skills require: self-contained context, never your session's history.
 - Issue multiple spawns in one response when tasks should run in parallel;
   sequential spawns run sequentially.
 - Subagents do not inherit your conversation context — everything they
   need must be in the prompt you write.
+- A subagent's reply arrives as a runtime notification in the parent
+  session — there is no `wait` tool; the answer lands automatically.
 - Dispatch templates that read `Subagent (general-purpose):` map to a
-  `spawn` whose `agentType` selects a role profile. This plugin ships two:
+  `spawn` whose `config_name` selects a role profile. This plugin ships two:
   `superpowers:implementer` and `superpowers:reviewer`.
 - A template's `model:` field maps to the agent profile's pinned model
   (in `ai.mistral.vibe/agents/*.toml` of this plugin), not to a spawn
   argument. If the needed tier is not pinned, dispatch anyway on the
   inherited session model and record that in the ledger.
-- A subagent name is unique for the lifetime of the parent session and
-  stays reserved after `close` — pick a fresh name per dispatch round.
+- A subagent name is unique for the lifetime of the parent session —
+  pick a fresh name per dispatch round.
+- Use `agents.list` to inspect running and idle children.
+- Use `agents.send_message` to send follow-up messages to an idle child.
+- Use `agents.interrupt` to stop a child's current turn without closing it.
 
 ## Todos and planning
 
